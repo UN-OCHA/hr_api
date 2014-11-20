@@ -15,3 +15,4 @@ features[features_api][] = api:2
 features[services_endpoint][] = hr_api
 features[variable][] = services_entity_max_pagesize
 features[variable][] = services_entity_resource_class
+files[] = plugins/hr_api_services_entity_resource.inc
