@@ -19,10 +19,10 @@ class HRApiServicesEntityResourceController extends ServicesEntityResourceContro
     $fields_exclude = array();
     switch($bundle) {
       case 'hr_organization':
-        $fields_exclude = array('parents_all', 'parent');
+        $fields_exclude = array('parents_all', 'parent', 'weight');
         break;
       case 'hr_location':
-        $fields_exclude = array('geofield', 'description_field', 'description');
+        $fields_exclude = array('geofield', 'description_field', 'description', 'weight');
         break;
     }
     return $fields_exclude;
@@ -62,11 +62,11 @@ class HRApiServicesEntityResourceController extends ServicesEntityResourceContro
               $data[$name] = entity_label($property->type(), $org_type);
             }
             else {
-              $service = $property->type();
-              if ($bundle = $wrapper->getBundle()) {
+              $resource = $property->type();
+              if ($resource == 'taxonomy_term' && $bundle = $property->getBundle()) {
                 $resource = $resource . '_'.$bundle;
               }
-              $data[$name] = $this->get_resource_reference($service, $id);
+              $data[$name] = $this->get_resource_reference($resource, $id);
             }
           }
         }
@@ -93,6 +93,27 @@ class HRApiServicesEntityResourceController extends ServicesEntityResourceContro
       }
     }
     return $data;
+  }
+
+  /**
+   * Return a resource reference array.
+   *
+   * @param type $resource
+   * @param type $id
+   * @return type
+   */
+  protected function get_resource_reference($resource, $id) {
+    $return = array(
+      'uri' => services_resource_uri(array('entity_' . $resource, $id)),
+      'id' => $id,
+    );
+    if (module_exists('uuid') && entity_get_info($resource)) {
+      $ids = entity_get_uuid_by_id($resource, array($id));
+      if ($id = reset($ids)) {
+        $return['uuid'] = $id;
+      }
+    }
+    return $return;
   }
 
 
