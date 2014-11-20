@@ -11,6 +11,23 @@
  * Much of this code is borrowed from restws module.
  */
 class HRApiServicesEntityResourceController extends ServicesEntityResourceControllerClean {
+
+  /**
+   * Returns fields to be excluded depending on entity type and bundle
+   */
+  protected function get_fields_excluded($entity_type, $bundle) {
+    $fields_exclude = array();
+    switch($bundle) {
+      case 'hr_organization':
+        $fields_exclude = array('parents_all', 'parent');
+        break;
+      case 'hr_location':
+        $fields_exclude = array('geofield', 'description_field', 'description');
+        break;
+    }
+    return $fields_exclude;
+  }
+
   /**
    * Return the data structure for an entity stripped of all "drupalisms" such as
    * field_ and complex data arrays.
@@ -19,7 +36,11 @@ class HRApiServicesEntityResourceController extends ServicesEntityResourceContro
    * @return type
    */
   protected function get_data($wrapper, $fields = '*') {
-    debug('hr_api');
+    $fields_exclude = array();
+    if ($wrapper->type() == 'taxonomy_term') {
+      $bundle = $wrapper->getBundle();
+      $fields_exclude = $this->get_fields_excluded('taxonomy_term', $bundle);
+    }
     if ($fields != '*') {
       $fields_array = explode(',', $fields);
     }
@@ -29,7 +50,7 @@ class HRApiServicesEntityResourceController extends ServicesEntityResourceContro
       // We don't want 'field_' at the beginning of fields. This is a drupalism and shouldn't be in the api.
       $name = preg_replace('/^field_/', '', $name);
       // If fields is set and it isn't one of them, go to the next.
-      if ($fields != '*' && !in_array($name, $fields_array)) {
+      if ($fields != '*' && !in_array($name, $fields_array) || in_array($name, $fields_exclude)) {
         continue;
       }
       try {
