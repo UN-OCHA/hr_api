@@ -62,7 +62,11 @@ class HRApiServicesEntityResourceController extends ServicesEntityResourceContro
               $data[$name] = entity_label($property->type(), $org_type);
             }
             else {
-              $data[$name] = $this->get_resource_reference($property->type(), $id);
+              $service = $property->type();
+              if ($bundle = $wrapper->getBundle()) {
+                $resource = $resource . '_'.$bundle;
+              }
+              $data[$name] = $this->get_resource_reference($service, $id);
             }
           }
         }
@@ -90,6 +94,7 @@ class HRApiServicesEntityResourceController extends ServicesEntityResourceContro
     }
     return $data;
   }
+
 
 }
    
