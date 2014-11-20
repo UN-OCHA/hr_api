@@ -36,7 +36,13 @@ class HRApiServicesEntityResourceController extends ServicesEntityResourceContro
         if ($property instanceof EntityDrupalWrapper) {
           // For referenced entities only return the URI.
           if ($id = $property->getIdentifier()) {
-            $data[$name] = $this->get_resource_reference($property->type(), $id);
+            if ($name == 'organization_type') {
+              $org_type = entity_load_single($property->type(), $id);
+              $data[$name] = entity_label($property->type(), $org_type);
+            }
+            else {
+              $data[$name] = $this->get_resource_reference($property->type(), $id);
+            }
           }
         }
         elseif ($property instanceof EntityValueWrapper) {
