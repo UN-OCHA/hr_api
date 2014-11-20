@@ -5,6 +5,7 @@ dependencies[] = ctools
 dependencies[] = hr_locations
 dependencies[] = hr_organizations
 dependencies[] = hr_themes
+dependencies[] = rest_server
 dependencies[] = services
 dependencies[] = services_entity
 dependencies[] = strongarm
