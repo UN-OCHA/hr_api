@@ -61,6 +61,7 @@ class HRApiServicesEntityResourceController extends ServicesEntityResourceContro
         }
       }
     }
+    return $data;
   }
 
 }
