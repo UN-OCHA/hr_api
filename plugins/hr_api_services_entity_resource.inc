@@ -19,10 +19,13 @@ class HRApiServicesEntityResourceController extends ServicesEntityResourceContro
     $fields_exclude = array();
     switch($bundle) {
       case 'hr_organization':
-        $fields_exclude = array('parents_all', 'parent', 'weight');
+        $fields_exclude = array('parents_all', 'parent', 'weight', 'feed_nid');
         break;
       case 'hr_location':
-        $fields_exclude = array('geofield', 'description_field', 'description', 'weight');
+        $fields_exclude = array('geofield', 'description_field', 'description', 'weight', 'feed_nid');
+        break;
+      case 'hr_theme':
+        $fields_exclude = array('description_field', 'description', 'weight', 'feed_nid');
         break;
     }
     return $fields_exclude;
