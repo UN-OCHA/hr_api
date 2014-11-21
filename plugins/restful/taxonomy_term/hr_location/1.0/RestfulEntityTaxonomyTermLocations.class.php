@@ -49,7 +49,7 @@ class RestfulEntityTaxonomyTermLocations extends \RestfulEntityBaseTaxonomyTerm 
   }
 
   protected function getGeolocation($wrapper) {
-    return 'test';
+    $geofield = $wrapper->field_geofield->value();
+    return array('lat' => $geofield['lat'], 'lon' => $geofield['lon']);
   }
-
 }
