@@ -15,12 +15,19 @@ class RestfulEntityTaxonomyTermOrganizations extends \RestfulEntityBaseTaxonomyT
 
     $public_fields['acronym'] = array(
       'property' => 'field_acronym',
-      'sub_property' => 'value',
     );
 
     $public_fields['homepage'] = array(
       'property' => 'field_website',
       'sub_property' => 'url',
+    );
+
+    $public_fields['fts_id'] = array(
+      'property' => 'field_organization_fts',
+    );
+
+    $public_fields['type'] = array(
+      'property' => 'field_organization_type',
     );
 
     return $public_fields;
