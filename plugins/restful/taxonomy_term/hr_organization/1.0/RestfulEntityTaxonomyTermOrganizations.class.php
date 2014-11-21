@@ -28,10 +28,15 @@ class RestfulEntityTaxonomyTermOrganizations extends \RestfulEntityBaseTaxonomyT
 
     $public_fields['type'] = array(
       'property' => 'field_organization_type',
-      'sub_property' => 'name',
+      'callback' => array($this, 'getType'),
     );
 
     return $public_fields;
+  }
+
+  protected function getType($wrapper) {
+    $type = $wrapper->field_organization_type->value();
+    return array('id' => $type->tid, 'label' => $type->name);
   }
 
 }
