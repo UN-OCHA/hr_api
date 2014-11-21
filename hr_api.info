@@ -9,3 +9,4 @@ dependencies[] = strongarm
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[variable][] = restful_enable_users_resource
+features[variable][] = restful_user_login_menu_item

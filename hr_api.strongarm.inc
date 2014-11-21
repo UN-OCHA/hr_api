@@ -17,5 +17,12 @@ function hr_api_strongarm() {
   $strongarm->value = '0';
   $export['restful_enable_users_resource'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'restful_user_login_menu_item';
+  $strongarm->value = '0';
+  $export['restful_user_login_menu_item'] = $strongarm;
+
   return $export;
 }
