@@ -18,13 +18,15 @@ class RestfulEntityTaxonomyTermLocations extends \RestfulEntityBaseTaxonomyTerm 
     );
 
     $public_fields['parents'] = array(
-      'property' => 'parents_all',
       'callback' => array($this, 'getParents'),
     );
 
     $public_fields['admin_level'] = array(
-      'property' => 'parents_all',
       'callback' => array($this, 'getAdminLevel'),
+    );
+
+    $public_fields['geolocation'] = array(
+      'callback' => array($this, 'getGeolocation'),
     );
 
     return $public_fields;
@@ -44,6 +46,10 @@ class RestfulEntityTaxonomyTermLocations extends \RestfulEntityBaseTaxonomyTerm 
       $count++;
     }
     return $count - 1;
+  }
+
+  protected function getGeolocation($wrapper) {
+    return 'test';
   }
 
 }
