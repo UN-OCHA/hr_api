@@ -4,6 +4,8 @@
  * Code for the API feature.
  */
 
+include_once 'hr_api.features.inc';
+
 /**
  * Implements hook_ctools_plugin_directory().
  */
