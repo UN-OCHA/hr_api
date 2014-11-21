@@ -22,10 +22,6 @@ class RestfulEntityTaxonomyTermGlobalClusters extends \RestfulEntityBaseNode {
       'sub_property' => 'url',
     );
 
-    $public_fields['icon'] = array(
-      'property' => 'field_image',
-    );
-
     return $public_fields;
   }
 
