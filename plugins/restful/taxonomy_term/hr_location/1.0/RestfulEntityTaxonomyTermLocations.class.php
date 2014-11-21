@@ -17,11 +17,33 @@ class RestfulEntityTaxonomyTermLocations extends \RestfulEntityBaseTaxonomyTerm 
       'property' => 'field_pcode',
     );
 
-    $public_fiels['geolocation'] = array(
-      'property' => 'field_geofield',
+    $public_fields['parents'] = array(
+      'property' => 'parents_all',
+      'callback' => array($this, 'getParents'),
+    );
+
+    $public_fields['admin_level'] = array(
+      'property' => 'parents_all',
+      'callback' => array($this, 'getAdminLevel'),
     );
 
     return $public_fields;
+  }
+
+  protected function getParents($wrapper) {
+    $labels = array();
+    foreach ($wrapper->parents_all->getIterator() as $delta => $term_wrapper) {
+      $labels[] = $this->getEntitySelf($term_wrapper);
+    }
+    return $labels;
+  }
+
+  protected function getAdminLevel($wrapper) {
+    $count = 0;
+    foreach ($wrapper->parents_all->getIterator() as $delta => $term_wrapper) {
+      $count++;
+    }
+    return $count - 1;
   }
 
 }
