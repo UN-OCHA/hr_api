@@ -10,4 +10,5 @@ $plugin = array(
   'class' => 'RestfulEntityTaxonomyTermOrganizations',
   'authentication_types' => TRUE,
   'authentication_optional' => TRUE,
+  'allow_origin' => '*',
 );
