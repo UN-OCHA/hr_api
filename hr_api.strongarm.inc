@@ -24,5 +24,12 @@ function hr_api_strongarm() {
   $strongarm->value = '0';
   $export['restful_user_login_menu_item'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'restful_default_output_formatter';
+  $strongarm->value = 'hal_json';
+  $export['restful_default_output_formatter'] = $strongarm;
+
   return $export;
 }
