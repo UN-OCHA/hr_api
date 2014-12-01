@@ -28,7 +28,7 @@ function hr_api_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'restful_default_output_formatter';
-  $strongarm->value = 'hal_json';
+  $strongarm->value = 'json';
   $export['restful_default_output_formatter'] = $strongarm;
 
   return $export;
