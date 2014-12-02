@@ -39,7 +39,6 @@ class RestfulEntityNodeOperations extends \RestfulEntityBaseNode {
 
     $public_fields['launch_date'] = array(
       'property' => 'field_launch_date',
-      'sub_property' => 'value',
     );
 
     return $public_fields;
