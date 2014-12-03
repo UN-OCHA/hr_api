@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \RestfulEntityTaxonomyTermGlobalClusters.
+ * Contains \RestfulEntityNodeGlobalClusters.
  */
 
-class RestfulEntityTaxonomyTermGlobalClusters extends \RestfulEntityBaseNode {
+class RestfulEntityNodeGlobalClusters extends \RestfulEntityBaseNode {
 
   /**
    * Overrides \RestfulEntityBase::publicFieldsInfo().
