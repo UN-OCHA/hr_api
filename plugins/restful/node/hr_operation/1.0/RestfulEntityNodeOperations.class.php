@@ -8,6 +8,19 @@
 class RestfulEntityNodeOperations extends \RestfulEntityBaseNode {
 
   /**
+   * Overrides RestfulEntityBase::getQueryForList().
+   *
+   * Avoid access check which is causing an issue
+   * IMPORTANT: MUST BE FIXED BEFORE GOING IN PRODUCTION
+   */
+  public function getQueryForList() {
+    $query = parent::getQueryForList();
+    $query->addTag('DANGEROUS_ACCESS_CHECK_OPT_OUT');
+    return $query;
+  }
+
+
+  /**
    * Overrides \RestfulEntityBase::publicFieldsInfo().
    */
   public function publicFieldsInfo() {
