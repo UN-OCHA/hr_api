@@ -15,7 +15,7 @@ class RestfulEntityNodeOperations extends \RestfulEntityBaseNode {
    */
   public function getQueryForList() {
     $query = parent::getQueryForList();
-    $query->addTag('DANGEROUS_ACCESS_CHECK_OPT_OUT');
+    $query->addMetaData('account', user_load(1));
     return $query;
   }
 
