@@ -8,16 +8,22 @@
 class RestfulEntityNodeOperations extends \RestfulEntityBaseNode {
 
   /**
-   * Overrides RestfulEntityBase::getQueryForList().
-   *
-   * Avoid using node_access which is causing an issue
+   * Overrides RestfulEntityBaseNode::addExtraInfoToQuery()
+   * 
+   * Adds proper query tags
    */
-  public function getQueryForList() {
-    $query = parent::getQueryForList();
-    $query->addTag('entity_field_access');
-    return $query;
+  protected function addExtraInfoToQuery($query) {
+    parent::addExtraInfoToQuery($query);
+    $filters = $this->parseRequestForListFilter();
+    if (!empty($filters)) {
+      foreach ($query->tags as $i => $tag) {
+        if ($tag == 'node_access') {
+          unset($query->tags[$i]);
+        }
+      }
+      $query->addTag('entity_field_access');
+    }
   }
-
 
   /**
    * Overrides \RestfulEntityBase::publicFieldsInfo().
