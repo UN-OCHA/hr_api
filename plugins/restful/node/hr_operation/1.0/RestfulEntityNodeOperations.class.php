@@ -10,12 +10,11 @@ class RestfulEntityNodeOperations extends \RestfulEntityBaseNode {
   /**
    * Overrides RestfulEntityBase::getQueryForList().
    *
-   * Avoid access check which is causing an issue
-   * IMPORTANT: MUST BE FIXED BEFORE GOING IN PRODUCTION
+   * Avoid using node_access which is causing an issue
    */
   public function getQueryForList() {
     $query = parent::getQueryForList();
-    $query->addMetaData('account', user_load(1));
+    $query->addTag('entity_field_access');
     return $query;
   }
 
